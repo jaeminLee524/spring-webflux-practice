@@ -15,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.reactive.server.WebTestClient;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @WebFluxTest(UserController.class)
@@ -48,15 +49,31 @@ class UserControllerTest {
     }
 
     @Test
-    void findAll() {
+    void findAllUsers() {
+        LocalDateTime now = LocalDateTime.now();
+
+        when(userService.findAll()).thenReturn(
+            Flux.just(
+                User.builder().id(1L).name("jm").email("fkdlem524@naver.com").createdAt(now).updatedAt(now).build(),
+                User.builder().id(2L).name("jm2").email("hello524@naver.com").createdAt(now).updatedAt(now).build(),
+                User.builder().id(3L).name("jm3").email("hihi@naver.com").createdAt(now).updatedAt(now).build()
+            ));
+
+        webTestClient.get().uri("/users")
+            .exchange()
+            .expectStatus().is2xxSuccessful()
+            .expectBodyList(UserResponse.class)
+            .hasSize(3);
     }
 
     @Test
     void findUser() {
+
     }
 
     @Test
     void deleteUser() {
+
     }
 
     @Test
