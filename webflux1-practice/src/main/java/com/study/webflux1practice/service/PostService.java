@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 @RequiredArgsConstructor
 @Service
@@ -22,5 +23,14 @@ public class PostService {
     public Flux<PostResponse> getMultiplePostContent(List<Long> idList) {
         return Flux.fromIterable(idList)
             .flatMap(this::getPostContent);
+    }
+
+    public Flux<PostResponse> getParallelMultiplePostContent(List<Long> idList) {
+        return Flux.fromIterable(idList)
+            .parallel()
+            .runOn(Schedulers.parallel())
+            .flatMap(this::getPostContent)
+            .log()
+            .sequential();
     }
 }

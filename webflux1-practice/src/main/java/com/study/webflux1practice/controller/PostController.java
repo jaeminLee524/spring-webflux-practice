@@ -30,6 +30,7 @@ public class PostController {
     public Flux<PostResponse> getMultiplePostContent(
         @RequestParam(name = "ids") List<Long> idList
     ) {
-        return postService.getMultiplePostContent(idList);
+//        return postService.getMultiplePostContent(idList);
+        return postService.getParallelMultiplePostContent(idList);
     }
 }
