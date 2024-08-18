@@ -85,6 +85,15 @@ class UserControllerTest {
     }
 
     @Test
+    void notFoundUser() {
+        when(userService.findById(1L)).thenReturn(Mono.empty());
+
+        webTestClient.get().uri("/users/1")
+            .exchange()
+            .expectStatus().is4xxClientError();
+    }
+
+    @Test
     void deleteUser() {
 
     }
