@@ -17,6 +17,7 @@ public class PostService {
 
     public Mono<PostResponse> getPostContent(Long id) {
         return postClient.getPost(id)
+            .onErrorResume(error -> Mono.just(new PostResponse(id.toString(), "Fallback data %d".formatted(id))))
             .log();
     }
 
