@@ -68,7 +68,20 @@ class UserControllerTest {
 
     @Test
     void findUser() {
+        LocalDateTime now = LocalDateTime.now();
 
+        when(userService.findById(1L)).thenReturn(
+            Mono.just(User.builder().id(1L).name("jm").email("fkdlem524@naver.com").createdAt(now).updatedAt(now).build()
+            ));
+
+        webTestClient.get().uri("/users/1")
+            .exchange()
+            .expectStatus().is2xxSuccessful()
+            .expectBody(UserResponse.class)
+            .value(user -> {
+                assertEquals(user.getName(), "jm");
+                assertEquals(user.getEmail(), "fkdlem524@naver.com");
+            });
     }
 
     @Test
