@@ -5,6 +5,7 @@ import static org.mockito.Mockito.when;
 
 import com.study.webflux1practice.dto.UserCreateRequest;
 import com.study.webflux1practice.dto.UserResponse;
+import com.study.webflux1practice.dto.UserUpdateRequest;
 import com.study.webflux1practice.repository.User;
 import com.study.webflux1practice.service.UserService;
 import java.time.LocalDateTime;
@@ -105,5 +106,22 @@ class UserControllerTest {
 
     @Test
     void upeateUser() {
+        LocalDateTime now = LocalDateTime.now();
+
+        when(userService.update(1L, "jm2", "jm2@naver.com")).thenReturn(
+            Mono.just(User.builder().id(1L).name("jm2").email("jm2@naver.com").createdAt(now).updatedAt(now).build())
+        );
+
+        webTestClient.put().uri("/users/1")
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(UserUpdateRequest.builder().name("jm2").email("jm2@naver.com").build())
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful()
+            .expectBody(UserResponse.class)
+            .value(user -> {
+                assertEquals(user.getName(), "jm2");
+                assertEquals(user.getEmail(), "jm2@naver.com");
+            });
     }
 }
