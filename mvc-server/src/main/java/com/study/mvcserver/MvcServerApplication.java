@@ -18,7 +18,13 @@ public class MvcServerApplication {
     @GetMapping("/posts/{id}")
     public Map<String, String> gertPosts(
         @PathVariable("id") Long id
-    ) {
+    ) throws Exception {
+        Thread.sleep(2000);
+
+        if (id > 10L) {
+            throw new Exception("id too long");
+        }
+
         return Map.of("id", id.toString(), "content", "Post content is %d".formatted(id));
     }
 }
