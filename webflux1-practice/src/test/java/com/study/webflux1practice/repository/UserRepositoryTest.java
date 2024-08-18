@@ -81,6 +81,22 @@ class UserRepositoryTest {
 
     @Test
     void deleteById() {
+        User user1 = User.builder()
+            .id(1L)
+            .name("jm1")
+            .email("jm1@naver.com")
+            .build();
+        User user2 = User.builder()
+            .id(2L)
+            .name("jm2")
+            .email("jm2@naver.com")
+            .build();
 
+        userRepository.save(user1);
+        userRepository.save(user2);
+
+        StepVerifier.create(userRepository.deleteById(2L))
+            .expectNext(1)
+            .verifyComplete();
     }
 }
