@@ -29,6 +29,29 @@ class UserRepositoryTest {
 
     @Test
     void findAll() {
+        User user1 = User.builder()
+            .id(1L)
+            .name("jm1")
+            .email("jm1@naver.com")
+            .build();
+        User user2 = User.builder()
+            .id(2L)
+            .name("jm2")
+            .email("jm2@naver.com")
+            .build();
+        User user3 = User.builder()
+            .id(3L)
+            .name("jm3")
+            .email("jm3@naver.com")
+            .build();
+
+        userRepository.save(user1);
+        userRepository.save(user2);
+        userRepository.save(user3);
+
+        StepVerifier.create(userRepository.findAll())
+            .expectNextCount(3)
+            .verifyComplete();
     }
 
     @Test
