@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: webflux1-practice
+
+logging:
+  level:
+    root: debug
+
