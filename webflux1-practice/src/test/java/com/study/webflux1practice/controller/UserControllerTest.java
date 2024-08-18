@@ -95,7 +95,12 @@ class UserControllerTest {
 
     @Test
     void deleteUser() {
+        when(userService.deleteById(1L)).thenReturn(Mono.just(1));
 
+        webTestClient.delete().uri("/users/1")
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful();
     }
 
     @Test
