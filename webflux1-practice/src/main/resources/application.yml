@@ -2,6 +2,11 @@ spring:
   application:
     name: webflux1-practice
 
+  r2dbc:
+    url: r2dbc:mysql://localhost:3307/r2dbc
+    username: root
+    password: root
+
 logging:
   level:
     root: info
