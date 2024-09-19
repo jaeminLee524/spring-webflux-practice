@@ -2,6 +2,7 @@ package com.study.webflux1practice.repository;
 
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -11,6 +12,7 @@ import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table("posts")
