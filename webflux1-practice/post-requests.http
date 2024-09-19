@@ -1,0 +1,18 @@
+### Create a new post
+POST http://localhost:8080/v2/posts
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "title": "Sample Title",
+  "content": "Sample Content"
+}
+
+### Get all posts
+GET http://localhost:8080/v2/posts
+
+### Get a post by ID
+GET http://localhost:8080/v2/posts/1
+
+### Delete a post by ID
+DELETE http://localhost:8080/v2/posts/1

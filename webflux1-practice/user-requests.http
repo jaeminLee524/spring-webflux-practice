@@ -1,0 +1,37 @@
+### Create a new user
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "name": "jm",
+  "email": "fkdlem524@naver.com"
+}
+
+### Create a new user2
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "name": "jm2",
+  "email": "fkdlem5242@naver.com"
+}
+
+### Get all users
+GET http://localhost:8080/users
+
+<> 2024-09-19T215727.200.json
+
+### Get a user by ID
+GET http://localhost:8080/users/1
+
+### Update a user
+PUT http://localhost:8080/users/1
+Content-Type: application/json
+
+{
+  "name": "jm2",
+  "email": "jm2@naver.com"
+}
+
+### Delete a user
+DELETE http://localhost:8080/users/1
